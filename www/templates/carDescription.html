@@ -1,0 +1,89 @@
+<ion-header-bar class="bar-stable">
+
+  <button class="icon ion-person-stalker button button-clear"></button>
+  <h1 class="title">{{title}}</h1>
+  <button class="icon ion-navicon button button-clear"></button>
+</ion-header-bar>
+
+<!--<div class="bar bar-subheader item-input-inset bar-light">-->
+<!--<label class="item-input-wrapper">-->
+<!--<i class="icon ion-search placeholder-icon"></i>-->
+<!--<input type="search" placeholder="Search">-->
+<!--</label>-->
+<!--</div>-->
+
+<ion-content class="has-subheader">
+  <ion-list>
+    <ion-item class="item-image">
+      <img src="{{car.imgUrl}}" class="icon" alt="Photo">
+    </ion-item>
+
+    <ion-item class="item-icon-left">
+      <p class="toRight">{{car.brand.title}}</p>
+      <i class="icon {{car.brand.icon}}"></i>
+    </ion-item>
+    <ion-item class="item-icon-left">
+      <p class="toRight">
+        {{car.model.title}}
+      </p>
+      <i class="icon {{car.model.icon}}"></i>
+    </ion-item>
+    <ion-item class="item-icon-left">
+      <p class="toRight">
+        {{car.engine.title}}
+      </p>
+      <img src="../img/engine.png" class="icon padding non-ionic-icon" alt="Photo">
+    </ion-item>
+    <ion-item class="item-icon-left">
+      <p class="toRight">
+        {{car.price.title}}
+      </p>
+      <i class="icon {{car.price.icon}}"></i>
+    </ion-item>
+    <ion-item class="item-icon-left">
+      <p class="toRight">
+        {{car.year.title}}
+      </p>
+      <i class="icon {{car.year.icon}}"></i>
+    </ion-item>
+    <ion-item class="item-icon-left">
+      <p class="toRight">
+        {{car.transmission.title}}
+      </p>
+      <img src="../img/transmission.png" class="icon padding non-ionic-icon" alt="Photo">
+    </ion-item>
+    <ion-item ng-show="car.eco != null" class="item-icon-left">
+      <p class="toRight">
+        {{car.eco.title}}
+      </p>
+      <i class="icon {{car.eco.icon}}"></i>
+    </ion-item>
+    <ion-item class="item-icon-left">
+      <p class="toRight">
+        {{car.maxSpeed.title}}
+      </p>
+      <i class="icon {{car.maxSpeed.icon}}"></i>
+    </ion-item>
+    <ion-item class="item-icon-left">
+      <p class="toRight">
+        {{car.consumes.title}}
+      </p>
+      <i class="icon {{car.consumes.icon}}"></i>
+    </ion-item>
+    <ion-item class="item-icon-left">
+      <p class="toRight">
+        {{car.wheelSystem.title}}
+      </p>
+      <img src="../img/wheelSystem.png" class="icon non-ionic-icon" alt="Photo">
+    </ion-item>
+    <ion-item class="item-icon-left">
+      <p class="toRight">
+        {{car.weight.title}} T
+      </p>
+      <img src="../img/weigthIcon.png" class="icon non-ionic-icon" alt="Photo">
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+
+

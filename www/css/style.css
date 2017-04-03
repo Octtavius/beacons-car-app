@@ -1,0 +1,9 @@
+/*this class is for non ionic icons. they are png images,, so i need to push them to the very
+right to be on same column as ionic icons*/
+.non-ionic-icon {
+  left: 0 !important;
+}
+
+.toRight {
+  float: right;
+}
