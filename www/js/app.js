@@ -50,7 +50,11 @@ angular.module('starter', ['ionic'])
     $urlRouterProvider.otherwise('/tab/list')
   })
 
-  .controller("ListController", function ($scope, Data) {
+  .controller("ListController", function ($scope, Data, $ionicSideMenuDelegate) {
+    $scope.toggleLeft = function () {
+      console.log("toggling");
+      $ionicSideMenuDelegate.toggleLeft();
+    }
     $scope.title = "Interactive Beacon App";
 
     $scope.car = Data.getAllCars()[5];

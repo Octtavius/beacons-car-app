@@ -235,7 +235,7 @@
           icon: "ion-pricetag"
         },
         engine: {
-          title: "3.0 Diesel",
+          title: "3.0 Diesel"
         },
         price: {
           title: 63000,
