@@ -51,11 +51,19 @@ angular.module('starter', ['ionic'])
             controller: 'CarsCtrl'
           }
         }
+      })
+      .state('tabs.my-gallery', {
+        url: '/my-gallery',
+        views: {
+          'my-gallery-tab': {
+            templateUrl: 'templates/my-gallery.html',
+            controller: 'GalleryCtrl'
+          }
+        }
       });
     $urlRouterProvider.otherwise('/tab/list/112')
   })
-
-  .controller("ListController", function ($scope, Data, $ionicSideMenuDelegate, $state) {
+  .controller("ListController", function ($scope, Data, $ionicSideMenuDelegate, $state, cam) {
     var carId = $state.params.id;
 
     $scope.car = Data.carById(carId)
@@ -66,7 +74,9 @@ angular.module('starter', ['ionic'])
     // }
     $scope.title = "Interactive Beacon App";
 
-    // $scope.car = Data.getAllCars()[5];
+    $scope.takePhoto = function () {
+      cam.takePhoto()
+    }
   })
   .controller("CarsCtrl", function ($scope, Data) {
     $scope.title = "Photo Gallery";
@@ -85,4 +95,16 @@ angular.module('starter', ['ionic'])
           $ionicSideMenuDelegate.toggleRight();
         }
       });
+  })
+  .controller("GalleryCtrl", function ($scope) {
+    $scope.title = "My Photos";
+  })
+  .factory("cam", function () {
+    var tp = function () {
+      console.log("take photo");
+    }
+
+    return{
+      takePhoto:tp
+    }
   })
