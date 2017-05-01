@@ -4,7 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic'])
+  .config(['$ionicConfigProvider', function($ionicConfigProvider) {
 
+    $ionicConfigProvider.tabs.position('bottom'); // other values: top
+
+  }])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -27,10 +31,11 @@ angular.module('starter', ['ionic'])
       .state('tabs', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'templates/tabs.html'
+        templateUrl: 'templates/tabs.html',
+        controller: "NavCtrl"
       })
       .state('tabs.list', {
-        url: '/list',
+        url: '/list/:id',
         views: {
           'list-tab': {
             templateUrl: 'templates/carDescription.html',
@@ -43,22 +48,41 @@ angular.module('starter', ['ionic'])
         views: {
           'gallery-tab': {
             templateUrl: 'templates/gallery.html',
-            controller: 'GalleryController'
+            controller: 'CarsCtrl'
           }
         }
       });
-    $urlRouterProvider.otherwise('/tab/list')
+    $urlRouterProvider.otherwise('/tab/list/112')
   })
 
-  .controller("ListController", function ($scope, Data, $ionicSideMenuDelegate) {
-    $scope.toggleLeft = function () {
-      console.log("hhhhhh");
-      $ionicSideMenuDelegate.toggleLeft();
-    }
+  .controller("ListController", function ($scope, Data, $ionicSideMenuDelegate, $state) {
+    var carId = $state.params.id;
+
+    $scope.car = Data.carById(carId)
+
+    // $scope.toggleRight = function () {
+    //   console.log("hhhhhh");
+    //   $ionicSideMenuDelegate.toggleRight();
+    // }
     $scope.title = "Interactive Beacon App";
 
-    $scope.car = Data.getAllCars()[5];
+    // $scope.car = Data.getAllCars()[5];
   })
-  .controller("GalleryController", function ($scope, $http) {
-    $scope.title = "Photo Gallery"
+  .controller("CarsCtrl", function ($scope, Data) {
+    $scope.title = "Photo Gallery";
+    $scope.allCars = Data.getAllCars()
+  })
+  .controller("NavCtrl", function ($scope, $ionicSideMenuDelegate) {
+    console.log("nav ctrl")
+    $scope.title = "Car Interactive App"
+    $scope.toggleRight = function () {
+      $ionicSideMenuDelegate.toggleRight();
+    };
+    //close side menu on state change
+    $scope.$on('$stateChangeStart',
+      function(event, toState, toParams, fromState, fromParams){
+        if($ionicSideMenuDelegate.isOpen()){
+          $ionicSideMenuDelegate.toggleRight();
+        }
+      });
   })

@@ -1,3 +1,12 @@
+<ion-header-bar class="bar-stable">
+
+  <button class="icon ion-person-stalker button button-clear"></button>
+  <h1 class="title">{{title}}</h1>
+  <!--<button class="icon ion-navicon button button-clear"></button>-->
+  <button class="button icon button-clear ion-navicon-round"
+          ng-click="toggleRight()"></button>
+</ion-header-bar>
+
 <ion-tabs class="tabs-light tabs-icon-top tabs-positive">
   <ion-tab title="Interact" icon="ion-android-walk" href="#/tab/list">
     <ion-nav-view name="list-tab"></ion-nav-view>

@@ -2,7 +2,8 @@
   var Data = function () {
     var cars = [
       {
-        imgUrl: "../img/mercedes1.png",
+        car_id: "111",
+        imgUrl: "img/mercedes1.png",
         brand: {
           title: "Mercedes-Benz",
           icon: "ion-model-s"
@@ -45,7 +46,8 @@
         }
       },
       {
-        imgUrl: "../img/Mercedes-AMG-GT-C-Roadster.png",
+        car_id: "112",
+        imgUrl: "img/Mercedes-AMG-GT-C-Roadster.png",
         brand: {
           title: "Mercedes-Benz",
           icon: "ion-model-s"
@@ -91,7 +93,53 @@
         }
       },
       {
-        imgUrl: "../img/volkswagen_beetle.png",
+        car_id: "113",
+        imgUrl: "img/vw_scirocco.png",
+        brand: {
+          title: "Volkswagen",
+          icon: "ion-model-s"
+        },
+        model: {
+          title: "Scirocco",
+          icon: "ion-pricetag"
+        },
+        engine: {
+          title: "2.0 Diesel ",
+          icon: "ion-"
+        },
+        price: {
+          title: 27500,
+          icon: "ion-social-euro"
+        },
+        year: {
+          title: "2017",
+          icon: "ion-calendar"
+        },
+        transmission: {
+          title: "Manual"
+        },
+        // eco: {
+        //   title: "Eco",
+        //   icon: "ion-leaf"
+        // },
+        maxSpeed: {
+          title: "230",
+          icon: "ion-ios-speedometer"
+        },
+        consumes: {
+          title: "5.4",
+          icon: "ion-waterdrop"
+        },
+        wheelSystem: {
+          title: "4x2 Front-Wheels"
+        },
+        weight: {
+          title: 1800
+        }
+      },
+      {
+        car_id: "114",
+        imgUrl: "img/volkswagen_beetle.png",
         brand: {
           title: "Volkswagen",
           icon: "ion-model-s"
@@ -137,51 +185,8 @@
         }
       },
       {
-        imgUrl: "../img/vw_scirocco.png",
-        brand: {
-          title: "Volkswagen",
-          icon: "ion-model-s"
-        },
-        model: {
-          title: "Scirocco",
-          icon: "ion-pricetag"
-        },
-        engine: {
-          title: "2.0 Diesel ",
-          icon: "ion-"
-        },
-        price: {
-          title: 27500,
-          icon: "ion-social-euro"
-        },
-        year: {
-          title: "2017",
-          icon: "ion-calendar"
-        },
-        transmission: {
-          title: "Manual"
-        },
-        // eco: {
-        //   title: "Eco",
-        //   icon: "ion-leaf"
-        // },
-        maxSpeed: {
-          title: "230",
-          icon: "ion-ios-speedometer"
-        },
-        consumes: {
-          title: "5.4",
-          icon: "ion-waterdrop"
-        },
-        wheelSystem: {
-          title: "4x2 Front-Wheels"
-        },
-        weight: {
-          title: 1800
-        }
-      },
-      {
-        imgUrl: "../img/bmw-i3.png",
+        car_id: "115",
+        imgUrl: "img/bmw-i3.png",
         brand: {
           title: "BMW",
           icon: "ion-model-s"
@@ -225,7 +230,8 @@
         }
       },
       {
-        imgUrl: "../img/A7.png",
+        car_id: "116",
+        imgUrl: "img/A7.png",
         brand: {
           title: "Audi",
           icon: "ion-model-s"
@@ -265,16 +271,26 @@
           title: 2300
         }
       }
-    ]
+    ];
+
+    var byId = function (id) {
+      console.log(id);
+      for(var i=0;i<cars.length;i++){
+        if(cars[i].car_id===id){
+          return cars[i];
+        }
+      }
+    }
 
     var getCars = function () {
       return cars;
     };
 
     return {
-      getAllCars: getCars
+      getAllCars: getCars,
+      carById: byId
     }
-  }
+  };
 
   var module = angular.module('starter');
 

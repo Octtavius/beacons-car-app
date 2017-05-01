@@ -1,46 +1,75 @@
-<ion-header-bar class="bar-stable">
+<ion-view>
+  <ion-pane>
+    <ion-side-menus>
+      <ion-side-menu-content>
+        <!--<ion-header-bar class="bar-stable">-->
 
-  <button class="icon ion-person-stalker button button-clear"></button>
-  <h1 class="title">Interactive Beacon App</h1>
-  <button class="icon ion-navicon button button-clear"></button>
-</ion-header-bar>
+        <!--<button class="icon ion-person-stalker button button-clear"></button>-->
+        <!--<h1 class="title">Interactive Beacon App</h1>-->
+        <!--<button class="icon ion-navicon button button-clear"></button>-->
+        <!--</ion-header-bar>-->
 
-<ion-content class="has-subheader">
-<h1>This is gallery</h1>
+        <ion-content class="has-subheader">
+          <h2>{{title}}</h2>
 
-  <div class="row">
-    <div class="col">
-      <img src="http://placehold.it/150x150" class="icon" alt="Photo">
-    </div>
-    <div class="col">
-      <img src="http://placehold.it/150x150" class="icon" alt="Photo">
-    </div>
-  </div>
+          <div  ng-repeat="car in allCars">
+            <div class="row" ng-if="$even">
+              <a href="#/tab/list/{{car.car_id}}" class="col car-item">
+                <img src="{{allCars[$index].imgUrl}}" class="icon" alt="Photo">
+              </a>
+              <a href="#/tab/list/{{allCars[$index + 1].car_id}}" class="col car-item">
+                <img src="{{allCars[$index + 1].imgUrl}}" class="icon" alt="Photo">
+              </a>
+            </div>
+          </div>
 
-  <div class="row">
-    <div class="col">
-      <img src="http://placehold.it/150x150" class="icon" alt="Photo">
-    </div>
-    <div class="col">
-      <img src="http://placehold.it/150x150" class="icon" alt="Photo">
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <img src="http://placehold.it/150x150" class="icon" alt="Photo">
-    </div>
-    <div class="col">
-      <img src="http://placehold.it/150x150" class="icon" alt="Photo">
-    </div>
-  </div>
+          <!--<div class="row">-->
+          <!--<div class="col">-->
+          <!--<img src="http://placehold.it/150x150" class="icon" alt="Photo">-->
+          <!--</div>-->
+          <!--<div class="col">-->
+          <!--<img src="http://placehold.it/150x150" class="icon" alt="Photo">-->
+          <!--</div>-->
+          <!--</div>-->
 
-  <div class="row">
-    <div class="col">
-      <img src="http://placehold.it/150x150" class="icon" alt="Photo">
-    </div>
-    <div class="col">
-      <img src="http://placehold.it/150x150" class="icon" alt="Photo">
-    </div>
-  </div>
-</ion-content>
+          <!--<div class="row">-->
+          <!--<div class="col">-->
+          <!--<img src="http://placehold.it/150x150" class="icon" alt="Photo">-->
+          <!--</div>-->
+          <!--<div class="col">-->
+          <!--<img src="http://placehold.it/150x150" class="icon" alt="Photo">-->
+          <!--</div>-->
+          <!--</div>-->
+
+          <!--<div class="row">-->
+          <!--<div class="col">-->
+          <!--<img src="http://placehold.it/150x150" class="icon" alt="Photo">-->
+          <!--</div>-->
+          <!--<div class="col">-->
+          <!--<img src="http://placehold.it/150x150" class="icon" alt="Photo">-->
+          <!--</div>-->
+          <!--</div>-->
+        </ion-content>
+
+      </ion-side-menu-content>
+      <ion-side-menu side="right">
+        <ion-list>
+          <ion-item>Home</ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-item>Photos</ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-item>Videos</ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-item>Articles</ion-item>
+        </ion-list>
+      </ion-side-menu>
+    </ion-side-menus>
+  </ion-pane>
+</ion-view>
