@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
   .config(['$ionicConfigProvider', function($ionicConfigProvider) {
 
     $ionicConfigProvider.tabs.position('bottom'); // other values: top
@@ -52,6 +52,15 @@ angular.module('starter', ['ionic'])
           }
         }
       })
+      .state('tabs.assistance', {
+        url: '/assistance',
+        views: {
+          'assistance-button': {
+            templateUrl: 'templates/assistance.html',
+            controller: 'AssistanceCtrl'
+          }
+        }
+      })
       .state('tabs.my-gallery', {
         url: '/my-gallery',
         views: {
@@ -61,6 +70,7 @@ angular.module('starter', ['ionic'])
           }
         }
       });
+
     $urlRouterProvider.otherwise('/tab/list/112')
   })
   .controller("ListController", function ($scope, Data, $ionicSideMenuDelegate, $state, cam) {
@@ -96,15 +106,84 @@ angular.module('starter', ['ionic'])
         }
       });
   })
-  .controller("GalleryCtrl", function ($scope) {
+  .controller("GalleryCtrl", function ($scope, cam, StorageService) {
     $scope.title = "My Photos";
+    $scope.allpic = [];
+
+    //when screen page is loaded, display somehting to console
+    // $scope.$on('$ionicView.afterEnter', function(){
+      console.log("After Entered Interactive Guide");
+      $scope.allpic = cam.getAllFotos;
+      // $scope.allpic = ["A7", "mercedes1", "tesla_model_s", "volkswagen_beetle", "wheelSystem", "temp"];
+      // $scope.allpic = ["DSC_0062", "DSC_0063", "DSC_0064", "DSC_0065", "DSC_0066"];
+      // console.log($scope.allpic.length);
+    $scope.things = StorageService.getAll();
+    console.log($scope.things.length);
   })
-  .factory("cam", function () {
-    var tp = function () {
-      console.log("take photo");
+  .controller("AssistanceCtrl", function ($scope) {
+
+  })
+  .factory("cam", function ($cordovaCamera, StorageService) {
+    var allPic = [];
+    var tp = function() {
+      var options = {
+        quality : 90,
+        destinationType : Camera.DestinationType.DATA_URL,
+        sourceType : Camera.PictureSourceType.CAMERA,
+        allowEdit : false,
+        encodingType: Camera.EncodingType.JPEG,
+        correctOrientation: true,
+        // targetWidth: 300,
+        // targetHeight: 300,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: true
+      };
+
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+        allPic.push("data:image/jpeg;base64," + imageData);
+        StorageService.add("data:image/jpeg;base64," + imageData);
+      }, function(err) {
+        // An error occured. Show a message to the user
+      });
     }
 
     return{
-      takePhoto:tp
+      takePhoto:tp,
+      getAllFotos:allPic
     }
   })
+  .directive('temp', ["$timeout", function ($timeout) {
+    return {
+      restrict: 'A',
+      link: function (scope, elem, attr) {
+        function checkSize(){
+          console.log(elem.prop('offsetHeight'));
+          console.log(elem.prop('clientWidth'));
+
+        }
+        var myVar = $timeout( checkSize, 1500 );
+
+      }
+    }
+  }])
+  .factory ('StorageService', function ($localStorage) {
+  $localStorage = $localStorage.$default({
+    things: []
+  });
+
+  var _getAll = function () {
+    return $localStorage.things;
+  };
+  var _add = function (thing) {
+    // console.log("adding:  " + thing);
+    $localStorage.things.push(thing);
+  }
+  var _remove = function (thing) {
+    $localStorage.things.splice($localStorage.things.indexOf(thing), 1);
+  }
+  return {
+    getAll: _getAll,
+    add: _add,
+    remove: _remove
+  };
+})
