@@ -76,6 +76,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
   .controller("ListController", function ($scope, Data, $ionicSideMenuDelegate, $state, cam) {
     var carId = $state.params.id;
 
+
+
     $scope.car = Data.carById(carId)
 
     // $scope.toggleRight = function () {
@@ -92,9 +94,27 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
     $scope.title = "Photo Gallery";
     $scope.allCars = Data.getAllCars()
   })
-  .controller("NavCtrl", function ($scope, $ionicSideMenuDelegate) {
+  .controller("NavCtrl", function ($scope, $ionicSideMenuDelegate, $ionicPopup) {
     console.log("nav ctrl")
-    $scope.title = "Car Interactive App"
+    $scope.title = "Car Interactive App";
+
+    //===================================
+    // A confirm dialog
+    $scope.showConfirm = function() {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Get Assitance',
+        template: 'Are you sure you need assistance? If yes, click OK and one of our staff will come over to help you'
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+          console.log('You are sure');
+        } else {
+          console.log('You are not sure');
+        }
+      });
+    };
+    //===================================
+
     $scope.toggleRight = function () {
       $ionicSideMenuDelegate.toggleRight();
     };

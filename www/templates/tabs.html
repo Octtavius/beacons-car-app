@@ -1,6 +1,6 @@
 <ion-header-bar class="bar-stable">
 
-  <button class="icon ion-person-stalker button button-clear"></button>
+  <button ng-click="showConfirm()" class="icon ion-person-stalker button button-clear"></button>
   <h1 class="title">{{title}}</h1>
   <!--<button class="icon ion-navicon button button-clear"></button>-->
   <button class="button icon button-clear ion-navicon-round"
@@ -16,7 +16,6 @@
   <ion-tab title="All Cars" icon="ion-model-s" href="#/tab/gallery">
     <ion-nav-view name="gallery-tab"></ion-nav-view>
   </ion-tab>
-
   <ion-tab title="My Gallery" icon="ion-images" href="#/tab/my-gallery">
     <ion-nav-view name="my-gallery-tab"></ion-nav-view>
   </ion-tab>
